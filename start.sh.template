@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# ============================================================
+#  start.sh — Set environment variables and run an example
+# ============================================================
+#  ⚠️  Copy this file to start.sh and fill in your real credentials.
+#
+#     cp start.sh.template start.sh
+#     chmod +x start.sh
+#
+#  Usage:
+#    ./start.sh list            # list available examples
+#    ./start.sh run basic_prompt
+#    ./start.sh run all
+# ============================================================
+
+# ---------- IBM Watsonx credentials ----------
+export WATSONX_URL="https://<REGION>.ml.cloud.ibm.com"
+export WATSONX_PROJECT_ID="<YOUR_PROJECT_ID>"
+export WATSONX_APIKEY="<YOUR_APIKEY>"
+
+# ---------- Ensure venv exists (Python 3.12 required) ----------
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ ! -f "$SCRIPT_DIR/.venv/bin/activate" ]; then
+    echo "[setup] Creating virtual environment with Python 3.12 ..."
+    python3.12 -m venv "$SCRIPT_DIR/.venv"
+    source "$SCRIPT_DIR/.venv/bin/activate"
+    echo "[setup] Installing dependencies ..."
+    pip install -r "$SCRIPT_DIR/requirements.txt"
+else
+    source "$SCRIPT_DIR/.venv/bin/activate"
+fi
+
+# ---------- Run ----------
+python "$SCRIPT_DIR/main.py" "$@"

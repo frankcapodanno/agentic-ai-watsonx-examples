@@ -1,0 +1,32 @@
+@echo off
+:: ============================================================
+::  start.cmd — Set environment variables and run an example
+:: ============================================================
+::  Copy this file to start.cmd and fill in your real credentials.
+::
+::     copy start.cmd.template start.cmd
+::
+::  Usage:
+::    start.cmd list
+::    start.cmd run basic_prompt
+::    start.cmd run all
+:: ============================================================
+
+:: ---------- IBM Watsonx credentials ----------
+set WATSONX_URL=https://<REGION>.ml.cloud.ibm.com
+set WATSONX_PROJECT_ID=<YOUR_PROJECT_ID>
+set WATSONX_APIKEY=<YOUR_APIKEY>
+
+:: ---------- Ensure venv exists (Python 3.12 required) ----------
+if not exist "%~dp0.venv\Scripts\activate.bat" (
+    echo [setup] Creating virtual environment with Python 3.12 ...
+    py -3.12 -m venv "%~dp0.venv"
+    call "%~dp0.venv\Scripts\activate.bat"
+    echo [setup] Installing dependencies ...
+    pip install -r "%~dp0requirements.txt"
+) else (
+    call "%~dp0.venv\Scripts\activate.bat"
+)
+
+:: ---------- Run ----------
+python "%~dp0main.py" %*

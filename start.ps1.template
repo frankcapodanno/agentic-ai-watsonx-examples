@@ -1,0 +1,33 @@
+# ============================================================
+#  start.ps1 — Set environment variables and run an example
+# ============================================================
+#  ⚠️  Copy this file to start.ps1 and fill in your real credentials.
+#
+#     Copy-Item start.ps1.template start.ps1
+#
+#  Usage:
+#    .\start.ps1 list
+#    .\start.ps1 run basic_prompt
+#    .\start.ps1 run all
+# ============================================================
+
+# ---------- IBM Watsonx credentials ----------
+$env:WATSONX_URL        = "https://<REGION>.ml.cloud.ibm.com"
+$env:WATSONX_PROJECT_ID = "<YOUR_PROJECT_ID>"
+$env:WATSONX_APIKEY     = "<YOUR_APIKEY>"
+
+# ---------- Ensure venv exists (Python 3.12 required) ----------
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$VenvActivate = Join-Path $ScriptDir ".venv\Scripts\Activate.ps1"
+if (-not (Test-Path $VenvActivate)) {
+    Write-Host "[setup] Creating virtual environment with Python 3.12 ..."
+    py -3.12 -m venv (Join-Path $ScriptDir ".venv")
+    & $VenvActivate
+    Write-Host "[setup] Installing dependencies ..."
+    pip install -r (Join-Path $ScriptDir "requirements.txt")
+} else {
+    & $VenvActivate
+}
+
+# ---------- Run ----------
+python (Join-Path $ScriptDir "main.py") @args
