@@ -1,7 +1,7 @@
-# Python Cheat-Sheet: LangChain + IBM Watsonx
+# LangChain + IBM Watsonx
 
 A hands-on project that demonstrates **every technique** from the
-*"Foundations of Generative AI and LangChain"* cheat-sheet, each with
+*"Foundations of Generative AI and LangChain"*, each with
 **different examples** so you can compare and learn.
 
 ---
@@ -26,7 +26,7 @@ A hands-on project that demonstrates **every technique** from the
 
 ## Prerequisites
 
-- **Python 3.10+**
+- **Python 3.10+ <= 3.12 **
 - An **IBM Cloud** account with Watsonx.ai access
 
 ## Setup
@@ -66,6 +66,7 @@ python-cheatsheet-examples/
 ├── main.py                        # CLI entry point
 ├── requirements.txt               # pinned dependencies
 ├── README.md                      # this file
+├── LICENSE                        # Unlicense (public domain)
 └── examples/
     ├── __init__.py
     ├── config.py                  # WatsonxLLM + llm_model helper
@@ -89,6 +90,13 @@ python-cheatsheet-examples/
   cheat-sheet so you get extra practice.
 - All IBM Watsonx config is centralised in `examples/config.py`.
 - You can override `WATSONX_URL`, `WATSONX_PROJECT_ID`, and
-  `WATSONX_API_KEY` via environment variables.
+  `WATSONX_APIKEY` via environment variables.
+
+## License
+
+This project is released into the **public domain** under the
+[Unlicense](LICENSE) — free to use, modify, and redistribute for any
+purpose (including commercial), with no conditions whatsoever.
+The software is provided **AS IS**, without warranty of any kind.
 
 ---
